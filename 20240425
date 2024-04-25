@@ -1,0 +1,96 @@
+import datetime
+
+
+
+def data_output(filename):
+
+    with open(filename, 'w') as ESS_data_out:
+
+        ESS_data_out.write("\n\n")
+
+        
+
+        dateTimeString = datetime.datetime.now().strftime("%Y%m%d%H%M%S%f")
+
+        ESS_data_out.write("SIOM Lithography IL system No.001\n")
+
+        ESS_data_out.write("#Current date & time is : {}\n\n\n".format(dateTimeString))
+
+        
+
+        ESS_data_out.write("#IL system parameters : \n")
+
+        ESS_data_out.write("#Illumination mode :\t{}\n".format(gVar.IL_system_params.IL_mode))
+
+        ESS_data_out.write("#Sigma outer :\t{}\n".format(gVar.IL_system_params.sigma_outer))
+
+        ESS_data_out.write("#Sigma inner :\t{}\n".format(gVar.IL_system_params.sigma_inner))
+
+        ESS_data_out.write("#VA transmission :\t{}\n".format(gVar.IL_system_params.VA_transmission))
+
+        ESS_data_out.write("#VA angle(degree) :\t{}\n".format(gVar.IL_system_params.VA_angle))
+
+        ESS_data_out.write("#With polarization :\t[No]\n\n")
+
+        
+
+        ESS_data_out.write("#Environmental parameters :\n")
+
+        ESS_data_out.write("Pressure : \t\n\n\n")
+
+        
+
+        ESS_data_out.write("Scanning parameters : \n")
+
+        ESS_data_out.write("X_scanning_start_position(mm) :\t{}\n".format(gVar.X_scanning_start_position))
+
+        ESS_data_out.write("Y_scanning_start_position(mm) :\t{}\n".format(gVar.Y_scanning_start_position))
+
+        ESS_data_out.write("Z_scanning_start_position(mm) :\t{}\n".format(gVar.Z_scanning_start_position))
+
+        ESS_data_out.write("X_scanning_end_position(mm) :\t{}\n".format(gVar.X_scanning_end_position))
+
+        ESS_data_out.write("Y_scanning_end_position(mm) :\t{}\n".format(gVar.Y_scanning_end_position))
+
+        ESS_data_out.write("Z_scanning_end_position(mm) :\t{}\n".format(gVar.Z_scanning_end_position))
+
+        ESS_data_out.write("X_scanning_step(mm) :\t{}\n".format(gVar.X_scanning_step))
+
+        ESS_data_out.write("Y_scanning_step(mm) :\t{}\n".format(gVar.Y_scanning_step))
+
+        ESS_data_out.write("Z_scanning_step(mm) :\t{}\n".format(gVar.Z_scanning_step))
+
+        ESS_data_out.write("X_scanning_cnt :\t{}\n".format(gVar.X_scanning_cnt))
+
+        ESS_data_out.write("Y_scanning_cnt :\t{}\n".format(gVar.Y_scanning_cnt))
+
+        ESS_data_out.write("Z_scanning_cnt :\t{}\n".format(gVar.Z_scanning_cnt))
+
+        ESS_data_out.write("Sampling_pulse_cnt :\t{}\n".format(gVar.Sampling_cnt))
+
+        ESS_data_out.write("Laser_pulse_freq :\t{}\n\n".format(gVar.Laser_pulse_freq))
+
+        
+
+        ESS_data_out.write("X\tY\tZ\t")
+
+        for _ in range(gVar.Sampling_cnt):
+
+            ESS_data_out.write("Ophir\tEDU\tBMU1\tBMU2\t")
+
+        ESS_data_out.write("\n")
+
+        
+
+        for xyz_point_data in gVar.ESS_scanning_data:
+
+            if xyz_point_data:
+
+                ESS_data_out.write("{}\t{}\t{}\t".format(xyz_point_data[0].curr_pos.x, xyz_point_data[0].curr_pos.y, xyz_point_data[0].curr_pos.z))
+
+                for _ in range(gVar.Sampling_cnt):
+
+                    ESS_data_out.write("0\t0\t0\t0\t")
+
+                ESS_data_out.write("\n")
+
